@@ -34,6 +34,11 @@ Adversarielle Agent-Teams fuer Claude Code. Statt linearer Sub-Agenten wird ein 
 - Konsens-Ergebnisse in `.agent-memory/consensus/`
 - Jede Debatte wird geloggt in `.agent-memory/debates/`
 
+## Research-Workflow (Standard)
+Web-Recherche IMMER ueber die Research-Pipeline ausfuehren:
+1. **Perplexity** (Suche + Links) → 2. **NotebookLM** (Ingest + RAG) → 3. **Claude** (liest nur Ergebnis)
+Ergebnisse in `research/<topic>-<date>.md` speichern. Siehe `skills/research-pipeline/SKILL.md`.
+
 ## Kosten-Bewusstsein
 - Jeder Subagent verbraucht eigene Tokens — Schwarm von 10 Scannern + 2 Advocates = ~12x Einzelagent
 - Immer mit kleinem Schwarm (2-3 Agenten) starten und skalieren
