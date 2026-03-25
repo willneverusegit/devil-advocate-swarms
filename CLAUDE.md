@@ -1,5 +1,10 @@
 # Devil's Advocate Swarms
 
+## Plugin-Info
+Dieses Projekt ist ein eigenstaendiges Claude Code Plugin. Es kann in jedem Projekt
+via `claude plugin install <pfad>` installiert und ueber `/swarm` aufgerufen werden.
+Bestehende direkte Zugriffe (z.B. ueber Pfade in `prompts/`, `scripts/`) funktionieren weiterhin.
+
 ## Was ist das
 Adversarielle Agent-Teams fuer Claude Code. Statt linearer Sub-Agenten wird ein hierarchischer Schwarm gespawnt, der durch Debatte (Devil's Advocate Pattern) zu besseren Ergebnissen kommt.
 
@@ -27,12 +32,15 @@ Adversarielle Agent-Teams fuer Claude Code. Statt linearer Sub-Agenten wird ein 
 - Strukturierte Prompt-Templates fuer Scanner, Advocate und Fixer Rollen
 
 ## Konventionen
-- Prompt-Templates in `prompts/`
+- **Plugin-Manifest:** `plugin.json`
+- **Plugin-Agents:** `agents/` (team-lead, scanner, advocate, fixer)
+- **Slash-Command:** `commands/swarm.md` → `/swarm`
+- Prompt-Templates in `prompts/` (weiterhin fuer Script-Modus)
 - Skills in `skills/{name}/SKILL.md`
 - Beispiel-Konfigurationen in `examples/`
-- Scratch Pad Dateien in `.agent-memory/scratch/`
-- Konsens-Ergebnisse in `.agent-memory/consensus/`
-- Jede Debatte wird geloggt in `.agent-memory/debates/`
+- Scratch Pad Dateien in `.agent-memory/scratch/` (im Zielprojekt)
+- Konsens-Ergebnisse in `.agent-memory/consensus/` (im Zielprojekt)
+- Jede Debatte wird geloggt in `.agent-memory/debates/` (im Zielprojekt)
 
 ## Research-Workflow (Standard)
 Web-Recherche IMMER ueber die Research-Pipeline ausfuehren:
