@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "devil-advocate-swarms-marketplace",
+  "description": "Adversarial agent swarms with Devil's Advocate debate pattern for Claude Code.",
+  "owner": {
+    "name": "willneverusegit",
+    "email": "noreply@local"
+  },
+  "plugins": [
+    {
+      "name": "devil-advocate-swarms",
+      "description": "Adversarial agent swarms: Scanner -> Debate -> Consensus -> Fix pipeline. Multi-model orchestration with Opus, Sonnet, and Codex.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/willneverusegit/devil-advocate-swarms.git"
+      }
+    }
+  ]
+}
