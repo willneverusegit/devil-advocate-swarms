@@ -2,7 +2,7 @@
 name: swarm-orchestrator
 description: Orchestrate adversarial agent swarms with Devil's Advocate debate pattern
 triggers:
-  - "swarm"
+  - "adversarial swarm"
   - "devil's advocate"
   - "adversarial review"
   - "agent debate"
@@ -33,8 +33,8 @@ Startet einen adversariellen Agent-Schwarm mit Scanner → Debate → Fixer Pipe
 
 ## Verwendung
 
-Der Team Lead wird mit dem Prompt aus `prompts/team-lead.md` initialisiert.
-Scanner, Advocates und Fixer nutzen ihre jeweiligen Templates aus `prompts/`.
+Der Team Lead wird mit dem Agent-Template `agents/team-lead.md` initialisiert.
+Scanner, Advocates und Fixer nutzen ihre jeweiligen Agent-Templates aus `agents/`.
 
 ## Ablauf
 

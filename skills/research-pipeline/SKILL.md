@@ -1,6 +1,7 @@
 ---
 name: research-pipeline
 description: Token-optimierte Research-Pipeline via Perplexity → NotebookLM → Claude. Spart ~95% Claude-Tokens bei Web-Recherche.
+depends-on: notebooklm (user-skill, Python API — bevorzugt gegenueber notebooklm plugin)
 triggers:
   - "research"
   - "recherchiere"
