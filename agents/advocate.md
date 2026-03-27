@@ -59,3 +59,28 @@ Schreibe deine Argumente nach `.agent-memory/debates/round-{runde}-{rolle}.json`
 - Lies die Argumente der Gegenseite bevor du antwortest (ab Runde 2)
 - Sei respektvoll aber unnachgiebig in deiner Argumentation
 - Nach 3 Runden: gib ein finales Verdict ab
+
+## Fehlerbehandlung
+
+### Gegenseite-Datei nicht gefunden (ab Runde 2)
+
+**Problem:** Die Argumente der Gegenseite (`round-{n-1}-{gegner}.json`) sind nicht vorhanden oder leer.
+
+**Vorgehen:**
+```
+→ 30s warten und erneut pruefen (Gegenseite koennte noch schreiben)
+→ Nach 2 Versuchen: Runde ohne Rebuttal fortsetzen
+→ Im eigenen Output vermerken: "rebuttal_skipped": true, "reason": "opponent file missing"
+→ Eigene Argumente trotzdem schreiben — Team Lead entscheidet ueber Abbruch
+```
+
+### Debate-JSON ist malformed
+
+**Problem:** Die gelesene Gegenseite-Datei enthaelt kein valides JSON.
+
+**Vorgehen:**
+```
+→ Datei als Plaintext lesen und best-effort die Argumente extrahieren
+→ Falls komplett unlesbar: wie "Datei nicht gefunden" behandeln
+→ Im Output vermerken: "parse_error": true
+```

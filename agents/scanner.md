@@ -47,3 +47,37 @@ Schreibe deine Ergebnisse nach `.agent-memory/scratch/scanner-{deine-nummer}.jso
 - Lieber ein False Positive zu viel als ein echtes Problem uebersehen
 - Immer Confidence-Wert angeben (0.0 = reine Vermutung, 1.0 = sicher)
 - Jeder Fund braucht konkretes Evidence (Code-Snippet, Zeile, etc.)
+
+## Fehlerbehandlung
+
+### Scan-Ziel existiert nicht / ist leer
+
+**Problem:** Das zugewiesene Verzeichnis oder die Datei aus `scan-assignments.json` existiert nicht oder ist leer.
+
+**Vorgehen:**
+```
+→ Fehlenden Pfad als "finding" mit severity "info" und confidence 0.0 dokumentieren
+→ Scan-Ergebnis trotzdem schreiben (leere findings-Liste + Hinweis im summary)
+→ Nicht abbrechen — andere Scanner koennten gueltige Bereiche haben
+```
+
+### Bash-Befehl schlaegt fehl
+
+**Problem:** Ein Analyse-Befehl (grep, find, etc.) gibt einen Fehler zurueck.
+
+**Vorgehen:**
+```
+→ Alternativen Befehl versuchen (z.B. Glob statt find, Grep statt bash grep)
+→ Wenn keine Alternative: Bereich als "nicht analysierbar" im summary vermerken
+→ Vorhandene Funde trotzdem schreiben
+```
+
+### Output-Datei kann nicht geschrieben werden
+
+**Problem:** `.agent-memory/scratch/scanner-{n}.json` kann nicht erstellt werden.
+
+**Vorgehen:**
+```
+→ Verzeichnis pruefen und ggf. erstellen: mkdir -p .agent-memory/scratch/
+→ Schlaegt das fehl: Ergebnis als Text in die Konsole ausgeben (Team Lead kann es manuell erfassen)
+```
