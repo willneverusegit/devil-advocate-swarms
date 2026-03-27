@@ -59,3 +59,51 @@ Scanner, Advocates und Fixer nutzen ihre jeweiligen Templates aus `prompts/`.
     ├── fix-F001.json            # Fix-Dokumentation
     └── fix-F003.json
 ```
+
+## Fehlerbehandlung
+
+### Scanner-Agent schlaegt fehl / schreibt keine Ausgabe
+
+**Problem:** Ein oder mehrere Scanner schreiben keine Ergebnis-Datei in `.agent-memory/scratch/scanner-{n}.json`.
+
+**Vorgehen:**
+```
+→ Nach 120s Timeout: fehlende Scanner-Dateien als nicht verfuegbar markieren
+→ Minimum 1 Scanner muss Ergebnis liefern — sonst Abbruch mit Fehlermeldung
+→ Fehlgeschlagene Scanner werden im Konsens-Ergebnis als "scanner_skipped" vermerkt
+→ Team Lead fährt mit verfuegbaren Ergebnissen fort
+```
+
+### Debatte erreicht keinen Konsens (max Runden erreicht)
+
+**Problem:** Nach 3 Debate-Runden ist prosecutor und defender weiterhin uneinig.
+
+**Vorgehen:**
+```
+→ Konservative Entscheidung: Alle strittigen Funde BEHALTEN (lieber false-positive als miss)
+→ Konsens-Ergebnis mit "consensus_method": "conservative_fallback" markieren
+→ Begruendung fuer jeden strittigen Fund dokumentieren
+```
+
+### Fixer-Agent schlaegt fehl
+
+**Problem:** `swarm-fixer` Agent kann eine Aenderung nicht umsetzen (Datei nicht schreibbar, Konflikt, etc.).
+
+**Vorgehen:**
+```
+→ Fix als "fix_status": "failed" in .agent-memory/consensus/fix-{id}.json dokumentieren
+→ Fehlermeldung und Ursache festhalten
+→ Naechsten Fix fortsetzen — ein fehlgeschlagener Fix stoppt nicht den gesamten Schwarm
+→ Am Ende: Summary aller fehlgeschlagenen Fixes ausgeben
+```
+
+### Verzeichnis-Erstellung schlaegt fehl
+
+**Problem:** `.agent-memory/scratch/`, `.agent-memory/consensus/` oder `.agent-memory/debates/` koennen nicht erstellt werden.
+
+**Vorgehen:**
+```
+→ Berechtigungsfehler: Nutzer auffordern, Schreibrechte zu pruefen
+→ Pfad nicht existiert: Bash-Fallback `mkdir -p .agent-memory/{scratch,consensus,debates}`
+→ Schwarm stoppt, bis Verzeichnisse verfuegbar sind
+```

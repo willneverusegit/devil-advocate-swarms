@@ -201,3 +201,13 @@ research/
 - Google-Account fuer NotebookLM
 - `notebooklm-py` CLI installiert (`pip install notebooklm-py`)
 - Authentifiziert via `notebooklm login`
+
+## Hinweis: Duplikation (WARNING)
+
+Diese SKILL.md existiert identisch in 3 Plugins:
+- `devil-advocate-swarms/0.1.0/skills/research-pipeline/SKILL.md` (diese Datei)
+- `multi-model-orchestrator/0.1.0/skills/research-pipeline/SKILL.md`
+- `self-improving-agent/1.0.0/skills/research-pipeline/SKILL.md`
+
+**Alle 3 Kopien sind byte-identisch (keine Abweichungen festgestellt).**
+Empfehlung fuer kuenftige Iterationen: Skill in ein gemeinsames Basis-Plugin (z.B. agentic-os) auslagern und in den drei Plugins per Referenz einbinden — vermeidet Sync-Divergenz bei Updates.
