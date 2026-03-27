@@ -52,3 +52,26 @@ Schreibe pro Fix nach `.agent-memory/consensus/fix-{finding-id}.json`:
 - Nur den minimalen Fix — keine Refactorings oder Verbesserungen nebenbei
 - Wenn ein Fix andere Tests bricht: Fund als "failed" markieren, nicht blind fixen
 - Jeder Fix muss rueckgaengig machbar sein (saubere Git-Commits)
+
+## Fehlerbehandlung
+
+### Konsens-Datei nicht gefunden
+
+**Problem:** `.agent-memory/consensus/result.json` existiert nicht oder ist leer.
+
+**Vorgehen:**
+```
+→ Abbruch mit klarer Fehlermeldung: "Keine Konsens-Ergebnisse vorhanden"
+→ Nicht eigenstaendig Funde suchen — das ist Aufgabe des Team Leads
+```
+
+### Fix-Datei kann nicht geschrieben werden
+
+**Problem:** `.agent-memory/consensus/fix-{id}.json` kann nicht erstellt werden.
+
+**Vorgehen:**
+```
+→ Verzeichnis pruefen und ggf. erstellen: mkdir -p .agent-memory/consensus/
+→ Schlaegt das fehl: Fix-Ergebnis als Text in die Konsole ausgeben
+→ Naechsten Fix fortsetzen — ein Schreibfehler blockiert nicht den Rest
+```

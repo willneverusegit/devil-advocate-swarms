@@ -57,3 +57,28 @@ Debatte zu einem qualitativ hochwertigen Ergebnis zu kommen.
 - Dokumentiere jede Entscheidung mit Begruendung
 - Bei Unsicherheit: lieber konservativ (mehr Funde behalten als zu viele verwerfen)
 - Erstelle `.agent-memory/scratch/`, `.agent-memory/consensus/`, `.agent-memory/debates/` Verzeichnisse falls sie nicht existieren
+
+## Fehlerbehandlung
+
+### Scanner-Agent liefert kein Ergebnis
+
+**Problem:** Ein oder mehrere Scanner schreiben keine Ergebnis-Datei.
+
+**Vorgehen:**
+```
+→ 120s Timeout pro Scanner
+→ Minimum 1 Scanner muss Ergebnis liefern — sonst Abbruch mit Fehlermeldung
+→ Fehlgeschlagene Scanner im Konsens-Ergebnis als "scanner_skipped" vermerken
+→ Mit verfuegbaren Ergebnissen fortfahren
+```
+
+### Advocate-Agent antwortet nicht
+
+**Problem:** Ein Advocate schreibt keine Debatte-Datei innerhalb des Timeouts.
+
+**Vorgehen:**
+```
+→ 90s Timeout pro Debatte-Runde
+→ Fehlender Advocate: Debatte abbrechen, konservativ entscheiden (alle Funde behalten)
+→ Im Konsens-Ergebnis vermerken: "debate_incomplete": true
+```
