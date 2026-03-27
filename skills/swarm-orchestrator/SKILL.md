@@ -7,6 +7,12 @@ triggers:
   - "adversarial review"
   - "agent debate"
   - "schwarm starten"
+depends-on:
+  - agents/team-lead.md (swarm-team-lead)
+  - agents/scanner.md (swarm-scanner)
+  - agents/advocate.md (swarm-advocate)
+  - agents/fixer.md (swarm-fixer)
+  - experimental_agent_teams setting in .claude/settings.json
 ---
 
 # Swarm Orchestrator Skill
