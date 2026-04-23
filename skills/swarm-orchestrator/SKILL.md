@@ -1,12 +1,19 @@
 ---
 name: swarm-orchestrator
-description: Orchestrate adversarial agent swarms with Devil's Advocate debate pattern
-triggers:
-  - "adversarial swarm"
-  - "devil's advocate"
-  - "adversarial review"
-  - "agent debate"
-  - "schwarm starten"
+description: >
+  Orchestrate adversarial agent swarms with Devil's Advocate debate pattern:
+  Scanner agents analyze in parallel, two Advocates debate findings for up
+  to 3 rounds, a Team Lead synthesizes consensus, and Fixer agents apply
+  the accepted changes.
+  Trigger phrases: "adversarial swarm", "devil's advocate", "adversarial review",
+  "agent debate", "swarm review", "start swarm", "schwarm starten",
+  "teufels advokat", "adversarialer review".
+user_invocable: true
+metadata:
+  author: devil-advocate-swarms
+  version: '0.1.1'
+  part-of: devil-advocate-swarms
+  layer: orchestration
 depends-on:
   - agents/team-lead.md (swarm-team-lead)
   - agents/scanner.md (swarm-scanner)
@@ -23,10 +30,10 @@ Startet einen adversariellen Agent-Schwarm mit Scanner → Debate → Fixer Pipe
 
 | Rolle | Modell | Begruendung |
 |-------|--------|-------------|
-| Team Lead | Opus | Braucht starke Planung + Synthese |
-| Scanner | Opus oder Sonnet | Je nach Komplexitaet der Analyse |
-| Advocate A/B | **Sonnet** | Argumentation braucht kein Opus, spart ~60% |
-| Fixer | Opus | Code-Aenderungen brauchen Praezision |
+| Team Lead | Opus (`claude-opus-4-7`) | Braucht starke Planung + Synthese |
+| Scanner | Opus oder Sonnet (`claude-sonnet-4-6`) | Je nach Komplexitaet der Analyse |
+| Advocate A/B | **Sonnet** (`claude-sonnet-4-6`) | Argumentation braucht kein Opus, spart ~60% |
+| Fixer | Opus (`claude-opus-4-7`) | Code-Aenderungen brauchen Praezision |
 
 ## Voraussetzung
 
