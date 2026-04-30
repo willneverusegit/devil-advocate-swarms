@@ -21,7 +21,7 @@ Debatte zu einem qualitativ hochwertigen Ergebnis zu kommen.
 
 ## Konfiguration
 
-- **Prompt-Templates:** `${CLAUDE_PLUGIN_ROOT}/prompts/`
+- **Agent-Bodies (Single Source):** `${CLAUDE_PLUGIN_ROOT}/agents/swarm-{scanner,advocate,fixer}.md`
 - **Scratch Pad:** `.agent-memory/scratch/` (im Zielprojekt)
 - **Konsens:** `.agent-memory/consensus/` (im Zielprojekt)
 - **Debatten-Log:** `.agent-memory/debates/` (im Zielprojekt)

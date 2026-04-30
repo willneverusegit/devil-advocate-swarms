@@ -1,5 +1,5 @@
 {
   "name": "devil-advocate-swarms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Adversarial agent swarms with Devil's Advocate debate pattern. Spawns Scanner, Advocate, and Fixer agents for quality-driven analysis through structured debate."
 }

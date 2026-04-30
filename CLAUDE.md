@@ -32,15 +32,22 @@ Adversarielle Agent-Teams fuer Claude Code. Statt linearer Sub-Agenten wird ein 
 - Strukturierte Prompt-Templates fuer Scanner, Advocate und Fixer Rollen
 
 ## Konventionen
-- **Plugin-Manifest:** `plugin.json`
-- **Plugin-Agents:** `agents/` (team-lead, scanner, advocate, fixer)
+- **Plugin-Manifest:** `.claude-plugin/plugin.json`
+- **Single Source of Truth fuer Agent-Bodies:** `agents/` (swarm-team-lead, swarm-scanner, swarm-advocate, swarm-fixer)
+- **Script-Modus:** `scripts/orchestrator.sh` haelt seine Prompts INLINE im Bash (DECOMPOSE_PROMPT, SCANNER_PROMPT, ADVOCATE_PROMPT, FIXER_PROMPT). Es liest NICHT aus `agents/`-Files. Trade-off: Cross-Provider-Modelle (Codex Scanner + Sonnet Advocates + Opus Synthesizer) lassen sich so direkt orchestrieren.
+- **Was es NICHT mehr gibt:** ein paralleles `prompts/`-Verzeichnis. Es wurde 2026-04-30 entfernt, weil es weder vom `Agent`-Tool-Modus (der nutzt `agents/`) noch vom Script-Modus (der inlined) konsumiert wurde — toter Code.
 - **Slash-Command:** `commands/swarm.md` → `/swarm`
-- Prompt-Templates in `prompts/` (weiterhin fuer Script-Modus)
-- Skills in `skills/{name}/SKILL.md`
-- Beispiel-Konfigurationen in `examples/`
-- Scratch Pad Dateien in `.agent-memory/scratch/` (im Zielprojekt)
-- Konsens-Ergebnisse in `.agent-memory/consensus/` (im Zielprojekt)
-- Jede Debatte wird geloggt in `.agent-memory/debates/` (im Zielprojekt)
+- **Skills:** `skills/swarm-orchestrator/SKILL.md` (Hauptzugang ueber Skill-Tool), `skills/research-pipeline/SKILL.md` (Redirect-Alias auf `agentic-os:research-pipeline`, siehe `wiki/concepts/skill-alias-pattern.md`)
+- **Beispiel-Konfigurationen:** `examples/`
+- **Scratch Pad / Konsens / Debatten:** `.agent-memory/{scratch,consensus,debates}/` im Zielprojekt
+
+### Bei Aenderungen an Agent-Rollen
+
+1. Nur `agents/<rolle>.md` editieren (Single Source).
+2. Wenn die Aenderung auch im Script-Modus benoetigt wird, den entsprechenden
+   inline-Prompt-Block in `scripts/orchestrator.sh` (`DECOMPOSE_PROMPT=`,
+   `SCANNER_PROMPT=`, `ADVOCATE_PROMPT=`, `FIXER_PROMPT=`) gleichlautend nachziehen.
+3. Aenderungen ohne Script-Bezug nur in `agents/` — kein paralleler Pfad mehr.
 
 ## Research-Workflow (Standard)
 Web-Recherche IMMER ueber die Research-Pipeline ausfuehren:

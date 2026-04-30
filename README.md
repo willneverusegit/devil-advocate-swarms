@@ -41,22 +41,36 @@ debattieren die Ergebnisse — erst bei Konsens wird gehandelt.
 devil-advocate-swarms/
 ├── CLAUDE.md                # Projekt-Instruktionen
 ├── README.md                # Diese Datei
-├── prompts/
-│   ├── team-lead.md         # System-Prompt fuer den Orchestrator
-│   ├── scanner.md           # Template fuer Scanner-Agenten
-│   ├── advocate.md          # Template fuer Devil's Advocate Rolle
-│   └── fixer.md             # Template fuer Fixer-Agenten
+├── .claude-plugin/
+│   └── plugin.json          # Plugin-Manifest
+├── agents/                  # Single Source of Truth fuer Agent-Prompts
+│   ├── swarm-team-lead.md   # Team Lead — Adversarial Swarm Orchestrator
+│   ├── swarm-scanner.md     # Scanner Agent — Parallele Funde-Erfassung
+│   ├── swarm-advocate.md    # Devil's Advocate (prosecutor/defender)
+│   └── swarm-fixer.md       # Fixer Agent — Konsens-Fix-Anwendung
+├── commands/
+│   └── swarm.md             # /swarm Slash-Command
+├── scripts/
+│   └── orchestrator.sh      # Cross-Provider Bash-Pipeline (Codex+Sonnet+Opus)
 ├── examples/
 │   ├── security-audit.md    # Beispiel: Security-Audit Workflow
 │   └── design-review.md     # Beispiel: Architektur-Review Workflow
 ├── skills/
-│   └── swarm-orchestrator/
-│       └── SKILL.md
-└── .agent-memory/
+│   ├── swarm-orchestrator/
+│   │   └── SKILL.md         # /swarm Skill (Agent-Tool-Modus)
+│   └── research-pipeline/
+│       └── SKILL.md         # Redirect-Alias auf agentic-os:research-pipeline
+└── .agent-memory/           # erst beim Lauf gefuellt
     ├── scratch/             # Geteiltes Scratch Pad
     ├── consensus/           # Konsens-Ergebnisse
     └── debates/             # Debatte-Logs
 ```
+
+**Hinweis zur Architektur:** Bis 2026-04-30 existierte zusaetzlich ein `prompts/`-Verzeichnis
+mit denselben Rollen-Texten in einer aelteren Format-Variante. Es wurde aufgegeben, weil
+der `scripts/orchestrator.sh` die Prompts inline im Bash haelt (siehe `DECOMPOSE_PROMPT=`,
+`SCANNER_PROMPT=`, etc.) und `prompts/` damit faktisch toter Code war.
+Single Source of Truth fuer Agent-Bodies ist heute `agents/`.
 
 ## Aktivierung
 
